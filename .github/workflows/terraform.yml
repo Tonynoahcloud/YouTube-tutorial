@@ -1,13 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
- 
+
 jobs:
   terraform:
     name: 'terraform'
@@ -20,16 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
 
-    defaults:
-      run:
-        shell: bash
-
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: checkout
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: 'Terraform format'
         uses: hashicorp/terraform-github-actions@main
@@ -66,6 +55,3 @@ jobs:
           tf_actions_version: 0.14.8
           tf_actions_subcommand: 'apply --auto-apply'
           tf_actions_working_dir: './terraform'
-
-
-      
